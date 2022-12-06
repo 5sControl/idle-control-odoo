@@ -1,60 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="staff_control.list">
-      <field name="name">staff_control list</field>
-      <field name="model">staff_control.staff_control</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
--->
+   <data>
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="staff_control.action_window">
-      <field name="name">staff_control window</field>
-      <field name="res_model">staff_control.staff_control</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
+      <record model="ir.ui.view" id="staff_control.list">
+         <field name="name">staff_control list</field>
+         <field name="model">staff_control.staff_control</field>
+         <field name="arch" type="xml">
+            <tree>
+               <field name="action" />
+               <field name="date" />
+               <field name="area" />
+               <field name="photo" />
+            </tree>
+         </field>
+      </record>
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="staff_control.action_server">
-      <field name="name">staff_control server</field>
-      <field name="model_id" ref="model_staff_control_staff_control"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
+      <record model="ir.ui.view" id="staff_control.kanban">
+         <field name="name">staff_control kanban</field>
+         <field name="model">staff_control.staff_control</field>
+         <field name="arch" type="xml">
+            <kanban class="oe_background_grey">
+               <field name="id" />
+               <field name="action" />
+               <field name="area" />
+               <field name="date" />
+               <field name="photo" />
+               <templates>
+                  <t t-name="kanban-box">
+                     <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill ">
+                        <div class="o_kanban_image">
+                           <img alt="Avatar" t-att-src="kanban_image('staff_control.staff_control', 'photo', record.id.raw_value)" />
+                        </div>
+                        <div class="oe_kanban_details">
+                           <ul>
+                              <li class="mb4">
+                                 <strong>
+                                    <field name="action" />
+                                 </strong>
+                              </li>
+                              <li t-if="record.date.raw_value" class="o_text_overflow">
+                                 <field name="date" />
+                              </li>
+                           </ul>
+                           <ul>
+                              <li t-if="record.create_date.raw_value" class="o_text_overflow">
+                                 <field name="create_date" />
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </t>
+               </templates>
+            </kanban>
+         </field>
+      </record>
 
-    <!-- Top menu item -->
-<!--
-    <menuitem name="staff_control" id="staff_control.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="staff_control.menu_1" parent="staff_control.menu_root"/>
-    <menuitem name="Menu 2" id="staff_control.menu_2" parent="staff_control.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="staff_control.menu_1_list" parent="staff_control.menu_1"
-              action="staff_control.action_window"/>
-    <menuitem name="Server to list" id="staff_control" parent="staff_control.menu_2"
-              action="staff_control.action_server"/>
--->
-  </data>
+      <record model="ir.ui.view" id="staff_control">
+         <field name="name">staff_control form</field>
+         <field name="model">staff_control.staff_control</field>
+         <field name="arch" type="xml">
+         <form string="Staff Control">
+            <sheet>
+             <div class="oe_button_box" name="button_box">
+             </div>
+                  <field name="photo" widget="image" options="{'size': [100, 200]}" class="oe_avatar"/>
+               <div name="title_name" class="oe_title">
+                   <h1>
+                       <table>
+                           <tr>
+                               <td>
+                                   <field name="action" required="1" placeholder="Action" style="padding-right:10px"/>
+                               </td>
+                           </tr>
+                       </table>
+                   </h1>
+               </div>
+               <group>
+                  <field name="date"/>
+               </group>
+               <group>
+                  <field name="area"/>
+               </group>
+            </sheet>
+         </form>
+         </field>
+      </record>
+
+      <!-- actions opening views on models -->
+      <record model="ir.actions.act_window" id="staff_control.action_window">
+         <field name="name">Alert</field>
+         <field name="res_model">staff_control.staff_control</field>
+         <field name="view_mode">kanban,tree,form</field>
+      </record>
+
+   </data>
 </odoo>

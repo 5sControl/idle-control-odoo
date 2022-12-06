@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem name="Staff control" id="staff_control.menu_root" action="staff_control.action_window"/>
+</odoo>
