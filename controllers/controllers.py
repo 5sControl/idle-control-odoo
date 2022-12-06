@@ -5,7 +5,7 @@ import json
 
 
 class StaffControl(http.Controller):
-    @http.route('/staff/get_all_alerts', auth='user', website=False, crf=True, cors='*', type='json', methods=['POST'])
+    @http.route('/staff/get_all_alerts', auth='user', type='json')
     def all_alerts(self, **kw):
         alert_rec = http.request.env['tools_control.tools_control'].sudo().search([])
         alerts = []
@@ -19,7 +19,7 @@ class StaffControl(http.Controller):
 
         return alerts
 
-    @http.route('/staff/create_alert', auth='user', website=False, crf=True, cors='*', type='json', methods=['POST'])
+    @http.route('/staff/create_alert', auth='user', type='json')
     def create(self, **rec):
         if http.request.render:
             if rec['action']:
@@ -33,6 +33,6 @@ class StaffControl(http.Controller):
                 args = {'success': True, 'message': 'Success', 'id': new_alert.id}
         return args
 
-    @http.route('/staff/ping', type='json', auth='public', cors='*', crf=False, methods=['POST'])
+    @http.route('/staff/ping', type='json', auth='public')
     def ping(self):
         return {'success': True}
