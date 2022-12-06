@@ -1,21 +1,38 @@
 # -*- coding: utf-8 -*-
-# from odoo import http
+from odoo import http
+from odoo.http import request
+import json
 
 
-# class StaffControl(http.Controller):
-#     @http.route('/staff_control/staff_control', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
+class StaffControl(http.Controller):
+    @http.route('/staff/get_all_alerts', auth='user', website=False, crf=True, cors='*', type='json', methods=['POST'])
+    def all_alerts(self, **kw):
+        alert_rec = http.request.env['tools_control.tools_control'].sudo().search([])
+        alerts = []
+        for rec in alert_rec:
+            alerts.append({
+                'action': rec.action,
+                'date': rec.date,
+                'area': rec.area,
+                'photo': rec.photo,
+            })
 
-#     @http.route('/staff_control/staff_control/objects', auth='public')
-#     def list(self, **kw):
-#         return http.request.render('staff_control.listing', {
-#             'root': '/staff_control/staff_control',
-#             'objects': http.request.env['staff_control.staff_control'].search([]),
-#         })
+        return alerts
 
-#     @http.route('/staff_control/staff_control/objects/<model("staff_control.staff_control"):obj>', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('staff_control.object', {
-#             'object': obj
-#         })
+    @http.route('/staff/create_alert', auth='user', website=False, crf=True, cors='*', type='json', methods=['POST'])
+    def create(self, **rec):
+        if http.request.render:
+            if rec['action']:
+                vals = {
+                    'action': rec['action'],
+                    'date': rec['date'],
+                    'area': rec['area'],
+                    'photo': rec['photo'],
+                }
+                new_alert = request.env['tools_control.tools_control'].sudo().create(vals)
+                args = {'success': True, 'message': 'Success', 'id': new_alert.id}
+        return args
+
+    @http.route('/staff/ping', type='json', auth='public', cors='*', crf=False, methods=['POST'])
+    def ping(self):
+        return {'success': True}
