@@ -7,7 +7,7 @@ import json
 class StaffControl(http.Controller):
     @http.route('/staff/get_all_alerts', auth='user', type='json')
     def all_alerts(self, **kw):
-        alert_rec = http.request.env['tools_control.tools_control'].sudo().search([])
+        alert_rec = http.request.env['staff_control.staff_control'].sudo().search([])
         alerts = []
         for rec in alert_rec:
             alerts.append({
@@ -29,7 +29,7 @@ class StaffControl(http.Controller):
                     'area': rec['area'],
                     'photo': rec['photo'],
                 }
-                new_alert = request.env['tools_control.tools_control'].sudo().create(vals)
+                new_alert = request.env['staff_control.staff_control'].sudo().create(vals)
                 args = {'success': True, 'message': 'Success', 'id': new_alert.id}
         return args
 
