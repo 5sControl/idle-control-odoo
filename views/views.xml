@@ -56,8 +56,8 @@
       </record>
 
       <record model="ir.ui.view" id="idle_control">
-         <field name="name">staff_control form</field>
-         <field name="model">staff_control.staff_control</field>
+         <field name="name">idle_control form</field>
+         <field name="model">idle_control.idle_control</field>
          <field name="arch" type="xml">
          <form string="Idle Control">
             <sheet>
