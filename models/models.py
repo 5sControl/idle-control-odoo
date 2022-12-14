@@ -4,7 +4,7 @@ from odoo import models, fields, api
 
 
 class StaffControl(models.Model):
-    _name = 'staff_control.staff_control'
+    _name = 'idle_control.idle_control'
     _rec_name = 'action'
 
     action = fields.Char()

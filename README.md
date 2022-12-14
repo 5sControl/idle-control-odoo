@@ -1,1 +1,1 @@
-Staff Control
+Idle Control

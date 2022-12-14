@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Staff control",
+    'name': "Idle Control",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -28,7 +28,7 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        'views/staff_control_menu.xml',
+        'views/idle_control_menu.xml',
     ],
     'application': True,
     'license': 'LGPL-3'
