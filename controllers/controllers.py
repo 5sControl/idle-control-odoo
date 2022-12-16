@@ -14,7 +14,7 @@ class IdleControl(http.Controller):
                 'action': rec.action,
                 'date': rec.date,
                 'area': rec.area,
-                'photo': rec.photo,
+                'photos': rec.photos,
             })
 
         return alerts
@@ -27,8 +27,12 @@ class IdleControl(http.Controller):
                     'action': rec['action'],
                     'date': rec['date'],
                     'area': rec['area'],
-                    'photo': rec['photo'],
+                    # 'photos': rec['photos'],
                 }
+                val_photos = {
+                    'photo': rec['photos']
+                }
+                request.env['photo_control.photo_control'].sudo().create(val_photos)
                 new_alert = request.env['idle_control.idle_control'].sudo().create(vals)
                 args = {'success': True, 'message': 'Success', 'id': new_alert.id}
         return args

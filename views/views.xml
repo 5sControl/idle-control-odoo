@@ -10,7 +10,7 @@
                <field name="action" />
                <field name="date" />
                <field name="area" />
-               <field name="photo" />
+               <field name="photos" />
             </tree>
          </field>
       </record>
@@ -24,12 +24,12 @@
                <field name="action" />
                <field name="area" />
                <field name="date" />
-               <field name="photo" />
+               <field name="photos" />
                <templates>
                   <t t-name="kanban-box">
                      <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill ">
                         <div class="o_kanban_image">
-                           <img alt="Avatar" t-att-src="kanban_image('idle_control.idle_control', 'photo', record.id.raw_value)" />
+                           <img alt="Avatar" t-att-src="kanban_image('photo_control.photo_control', 'photo', record.id.raw_value)" />
                         </div>
                         <div class="oe_kanban_details">
                            <ul>
@@ -63,7 +63,7 @@
             <sheet>
              <div class="oe_button_box" name="button_box">
              </div>
-                  <field name="photo" widget="image" options="{'size': [600, 800]}" class="oe_avatar"/>
+                  <field name="photos" widget="image" options="{'size': [600, 800]}" class="oe_avatar"/>
                <div name="title_name" class="oe_title">
                    <h1>
                        <table>
