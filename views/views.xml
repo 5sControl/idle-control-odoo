@@ -10,7 +10,7 @@
                <field name="action" />
                <field name="date" />
                <field name="area" />
-               <field name="photos" />
+<!--               <field name="photos" />-->
             </tree>
          </field>
       </record>
@@ -24,7 +24,7 @@
                <field name="action" />
                <field name="area" />
                <field name="date" />
-               <field name="photos" />
+<!--               <field name="photos" />-->
                <templates>
                   <t t-name="kanban-box">
                      <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill ">
@@ -63,7 +63,10 @@
             <sheet>
              <div class="oe_button_box" name="button_box">
              </div>
-                  <field name="photos" widget="image" options="{'size': [600, 800]}" class="oe_avatar"/>
+<!--                <tree string="idle_control.idle_control">-->
+<!--                    <field name="photos"/>-->
+<!--                </tree>-->
+                  <field name="photos" widget="one2many_list"/>
                <div name="title_name" class="oe_title">
                    <h1>
                        <table>
@@ -90,7 +93,7 @@
       <record model="ir.actions.act_window" id="idle_control.action_window">
          <field name="name">Alert</field>
          <field name="res_model">idle_control.idle_control</field>
-         <field name="view_mode">kanban,tree,form</field>
+         <field name="view_mode">tree,kanban,form</field>
       </record>
 
    </data>
