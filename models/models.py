@@ -17,6 +17,7 @@ class IdleControl(models.Model):
         vals['duration'] = int(round((int(vals['duration']) / 60), 0))
         return super(IdleControl, self).create(vals)
 
+
 class ImageControl(models.Model):
     _name = 'photo_control.photo_control'
 

@@ -43,3 +43,16 @@ class IdleControl(http.Controller):
     @http.route('/idle/ping', type='json', auth='public')
     def ping(self):
         return {'success': True}
+
+    @http.route('/idle/update_alert', auth='user', type='json')
+    def update_asdf(self, **kw):
+        if http.request.render:
+            if kw['photo']:
+                vals = {
+                    'idle_id': kw.get('id'),
+                    'time': kw.get('time'),
+                    'photo': kw.get('photo')
+                }
+                new_photo = request.env['photo_control.photo_control'].sudo().create(vals)
+            args = {'success': True, 'message': 'Success', 'id': new_photo.id}
+        return args
