@@ -21,7 +21,7 @@ class IdleControl(models.Model):
 class ImageControl(models.Model):
     _name = 'photo_control.photo_control'
 
-    idle_id = fields.Many2one('idle_control.idle_control')
+    idle_id = fields.Many2one('idle_control.idle_control', string="Photo ID")
     time = fields.Char()
     photo = fields.Binary(
         string="Image",
