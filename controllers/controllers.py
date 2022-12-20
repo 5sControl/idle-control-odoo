@@ -32,6 +32,7 @@ class IdleControl(http.Controller):
                 new_alert = request.env['idle_control.idle_control'].sudo().create(vals)
                 val_photos = {
                     'photo': rec['photo'],
+                    'time': rec['time'],
                     'idle_id': new_alert.id,
                 }
                 request.env['photo_control.photo_control'].sudo().create(val_photos)
