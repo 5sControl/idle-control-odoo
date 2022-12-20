@@ -63,10 +63,20 @@
             <sheet>
              <div class="oe_button_box" name="button_box">
              </div>
+                <kanban>
+                    <t t-name="kanban-box">
+                        <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('idle_control.idle_control', 'photos', record.id.value)" />
+                                </a>
+                        </div>d
+                    </t>
+                </kanban>
 <!--                <tree string="idle_control.idle_control">-->
 <!--                    <field name="photos"/>-->
 <!--                </tree>-->
-                  <field name="photos" widget="one2many_list"/>
+<!--                  <field name="photos" widget="one2many_list"/>-->
                <div name="title_name" class="oe_title">
                    <h1>
                        <table>

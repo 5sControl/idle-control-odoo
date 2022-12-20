@@ -10,13 +10,14 @@ class IdleControl(models.Model):
     action = fields.Char()
     date = fields.Char()
     area = fields.Char()
-    photos = fields.One2many('photo_control.photo_control', 'idle_id', string='Photo')
+    # photos = fields.One2many('photo_control.photo_control', 'idle_id', string='Photo')
 
 
 class ImageControl(models.Model):
     _name = 'photo_control.photo_control'
 
-    idle_id = fields.Many2one('idle_control.idle_control', )
+    idle_id = fields.Many2one('idle_control.idle_control')
+    time = fields.Char()
     photo = fields.Binary(
         string="Image",
         compute="_compute_image",
