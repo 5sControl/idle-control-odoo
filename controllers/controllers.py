@@ -22,18 +22,18 @@ class IdleControl(http.Controller):
     @http.route('/idle/create_alert', auth='user', type='json')
     def create(self, **rec):
         if http.request.render:
-            if rec['action']:
+            if rec['device']:
                 vals = {
-                    'action': rec['action'],
+                    'device': rec['device'],
                     'date': rec['date'],
-                    'area': rec['area'],
+                    'duration': rec['duration'],
                 }
 
                 new_alert = request.env['idle_control.idle_control'].sudo().create(vals)
-                for photo in rec['photo']:
+                for item in rec['photos']:
                     val_photos = {
-                        'photo': photo,
-                        'time': rec['time'],
+                        'photo': item['photo'],
+                        'time': item['time'],
                         'idle_id': new_alert.id,
                     }
                     request.env['photo_control.photo_control'].sudo().create(val_photos)
