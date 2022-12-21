@@ -45,14 +45,20 @@ class IdleControl(http.Controller):
         return {'success': True}
 
     @http.route('/idle/update_alert', auth='user', type='json')
-    def update_asdf(self, **kw):
-        if http.request.render:
-            if kw['photo']:
-                vals = {
-                    'idle_id': kw.get('id'),
-                    'time': kw.get('time'),
-                    'photo': kw.get('photo')
-                }
-                new_photo = request.env['photo_control.photo_control'].sudo().create(vals)
-            args = {'success': True, 'message': 'Success', 'id': new_photo.id}
+    def update_asdf(self, **rec):
+        new_duration = int(round((int(rec['duration']) / 60), 0))
+        http.request.env['idle_control.idle_control'].sudo().browse(rec.get('id')).write(
+            {
+                'duration': new_duration
+            }
+        )
+
+        for item in rec['photos']:
+            val_photos = {
+                'photo': item['photo'],
+                'time': item['time'],
+                'idle_id': rec.get('id'),
+            }
+            request.env['photo_control.photo_control'].sudo().create(val_photos)
+            args = {'success': True, 'message': 'Success'}
         return args
